@@ -18,17 +18,32 @@ import "@fontsource/poppins";
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
-    <header class="bg-slate-400 py-4">
-      <div class="flex justify-between mx-auto max-w-7xl">
+  <body class="bg-customDarkGrey text-customWhite">
+    <!-- <header class="bg-slate-400 py-4 shadow-md">
+      <div class="flex justify-between mx-auto md:max-w-7xl max-w-xs">
         <div>Logo</div>
-        <div class="flex">
-          <div class="mr-4"><a href="/">Home</a></div>
-          <div><a class="mr-4" href="/blog">Blog</a></div>
-          <div><a href="/side-projects">Side Projects</a></div>
+        <div class="flex justify-center items-center">
+          <div class="mr-4">
+            <a
+              class="text-sm text-customLightGrey hover:text-customWhite transition-colors"
+              href="/">Home</a
+            >
+          </div>
+          <div class="mr-4">
+            <a
+              class="text-sm text-customLightGrey hover:text-customWhite transition-colors"
+              href="/blog">Blog</a
+            >
+          </div>
+          <div>
+            <a
+              class="text-sm text-customLightGrey hover:text-customWhite transition-colors"
+              href="/side-projects">Side Projects</a
+            >
+          </div>
         </div>
       </div>
-    </header>
+    </header> -->
     <slot />
   </body>
 </html>

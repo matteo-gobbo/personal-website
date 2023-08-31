@@ -9,6 +9,16 @@ module.exports = {
         sans: ["Poppins", ...defaultTheme.fontFamily.sans],
       },
     },
+    colors: {
+      transparent: "transparent",
+      customDarkGrey: "#222222",
+      customLightGrey: "#aaaaaa",
+      customWhite: "#f5f5f5",
+      customBlue: "#007bff",
+      customParagraph: "#d5d5d5",
+      customYellow: "#facc15",
+      customDarkBlue: "#1e40af",
+    },
   },
   plugins: [],
 };

@@ -1,11 +1,50 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Link from "../components/Link.astro";
+import Social from "../components/Social.astro";
 ---
 
 <Layout title="Welcome to my website">
   <main>
-    <div class="mx-auto max-w-7xl">
-      <h1 class="text-3xl font-bold text-center">Website and blog</h1>
+    <div class="mx-auto md:max-w-7xl max-w-xs md:mt-32 mt-16">
+      <h1 class="md:text-7xl text-4xl font-bold mb-8">
+        Hi I'm <br />Matteo Gobbo
+      </h1>
+      <h2 class="text-3xl font-light text-customLightGrey mb-8">
+        I build things for the web.
+      </h2>
+      <p class="text-customParagraph leading-6 mb-2">
+        I worked as a freelancer for two years and I had the chance to work on
+        multiple digital products <br />for both business and consumers,
+        covering a variety of different domains.
+      </p>
+      <p class="text-customParagraph leading-6 mb-2">
+        Main collaborations have been with <Link
+          text="Fuoricittà"
+          href="https://fuoricitta.it/"
+        />
+        and
+        <Link text="Hipster Studio" href="https://www.hipsterstudio.it/" />.
+      </p>
+      <p class="text-customParagraph mb-12">
+        Since July 2022 I'm front-end Developer at <Link
+          text="Conio Inc"
+          href="https://www.conio.com/"
+          isExternal
+        />.
+      </p>
+      <div class="flex start items-center">
+        Let's keep in touch on:
+        <div class="w-4"></div>
+        <Social
+          href="https://www.linkedin.com/in/matteo-gobbo/"
+          iconPath="ri:linkedin-fill"
+        />
+        <div class="w-2"></div>
+        <Social href="https://twitter.com/matteogobbo_" iconPath="socials/x" />
+        <div class="w-2"></div>
+        <Social href="https://github.com/matteo-gobbo" iconPath="mdi:github" />
+      </div>
     </div>
   </main>
 </Layout>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  text: string;
+  href: string;
+  isExternal?: boolean;
+}
+
+const { text, href, isExternal } = Astro.props;
+---
+
+<a
+  class="text-customBlue underline cursor-pointer hover:no-underline"
+  href={href}
+  target={isExternal ? "_blank" : undefined}
+>
+  {text}
+</a>
