@@ -2,6 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Link from "../components/Link.astro";
 import Social from "../components/Social.astro";
+
+import IconX from "../icons/socials/x.svg";
+import IconLinkedIn from "../icons/socials/linkedin.svg";
+import IconGithub from "../icons/socials/github.svg";
 ---
 
 <Layout title="Matteo Gobbo | Front-end Developer">
@@ -38,12 +42,12 @@ import Social from "../components/Social.astro";
         <div class="w-4"></div>
         <Social
           href="https://www.linkedin.com/in/matteo-gobbo/"
-          iconPath="ri:linkedin-fill"
+          src={IconLinkedIn}
         />
         <div class="w-2"></div>
-        <Social href="https://twitter.com/matteogobbo_" iconPath="socials/x" />
+        <Social href="https://twitter.com/matteogobbo_" src={IconX} />
         <div class="w-2"></div>
-        <Social href="https://github.com/matteo-gobbo" iconPath="mdi:github" />
+        <Social href="https://github.com/matteo-gobbo" src={IconGithub} />
       </div>
     </div>
   </main>

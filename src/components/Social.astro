@@ -1,14 +1,10 @@
 ---
-import { Icon } from "astro-icon";
-
 interface Props {
   href: string;
-  iconPath: string;
+  src: string;
 }
 
-const { href, iconPath } = Astro.props;
-
-import IconX from "../icons/socials/x.svg";
+const { href, src } = Astro.props;
 ---
 
 <div>
@@ -17,6 +13,6 @@ import IconX from "../icons/socials/x.svg";
     target="_blank"
     href={href}
   >
-    <img src={IconX} alt="social" style="fill: white;" />
+    <img src={src} alt="social" height="35" width="35" style="fill: white;" />
   </a>
 </div>
