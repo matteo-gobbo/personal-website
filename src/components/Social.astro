@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { href, iconPath } = Astro.props;
+
+import IconX from "../icons/socials/x.svg";
 ---
 
 <div>
@@ -15,6 +17,6 @@ const { href, iconPath } = Astro.props;
     target="_blank"
     href={href}
   >
-    <Icon name={iconPath} />
+    <img src={IconX} alt="social" style="fill: white;" />
   </a>
 </div>
