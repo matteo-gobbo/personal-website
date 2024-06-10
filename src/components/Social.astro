@@ -2,17 +2,16 @@
 interface Props {
   href: string;
   src: string;
+  alt: string;
 }
 
-const { href, src } = Astro.props;
+const { href, src, alt } = Astro.props;
 ---
 
-<div>
-  <a
-    class="md:w-[35px] w-[28px] flex justify-center items-center p-1.5 bg-customBlue rounded-full"
-    target="_blank"
-    href={href}
-  >
-    <img src={src} alt="social" height="35" width="35" style="fill: white;" />
-  </a>
-</div>
+<a
+  class="md:w-[28px] w-[28px] flex justify-center items-center p-1 bg-customBlue rounded-full"
+  target="_blank"
+  href={href}
+>
+  <img src={src} alt={alt} height="32" width="32" style="fill: white;" />
+</a>
