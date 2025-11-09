@@ -4,6 +4,8 @@ import Link from "../components/Link.astro";
 import { getCollection } from "astro:content";
 import { formatDate } from "../utils/date";
 import Socials from "../components/Socials.astro";
+import { getGithubPullRequests } from "../api/github";
+import { extractRepositoryUrl, extractRepositoryName } from "../utils/github";
 
 const blogEntries = await getCollection("blog");
 
@@ -14,6 +16,8 @@ const publishedBlogPosts = blogEntries
         const dateB = new Date(b.data.publishedDate!).getTime();
         return dateB - dateA;
     });
+
+const ossContributions = await getGithubPullRequests();
 ---
 
 <Layout title="Matteo Gobbo | Front-end Developer">
@@ -67,15 +71,44 @@ const publishedBlogPosts = blogEntries
                                 class="hover:underline"
                             >
                                 <span>{blogPostEntry.data.title}</span>
-                                {blogPostEntry.data.publishedDate === null && (
-                                    <span class="ml-8 px-4  bg-yellow-600 text-white rounded-full">
-                                        draft
-                                    </span>
-                                )}
                             </a>
                             <span>
                                 {formatDate(blogPostEntry.data.publishedDate!)}
                             </span>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+    <section class="mt-24">
+        <h3 class="md:text-4xl text-xl font-bold mb-4">OSS Contributions</h3>
+        <div>
+            <ul class="flex flex-col gap-y-2">
+                {
+                    ossContributions.map((c) => (
+                        <li class="flex justify-between">
+                            <div class="flex gap-x-4">
+                                <a
+                                    href={c.html_url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    class="hover:underline"
+                                >
+                                    {c.title}
+                                </a>
+                                <a
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    href={extractRepositoryUrl(
+                                        c.repository_url,
+                                    )}
+                                    class="hover:underline text-gray-400"
+                                >
+                                    {extractRepositoryName(c.repository_url)}
+                                </a>
+                            </div>
+                            <span>{formatDate(c.created_at)}</span>
                         </li>
                     ))
                 }
