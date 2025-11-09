@@ -1,37 +1,36 @@
 ---
 export function initializeCopyButtons() {
-  const snippets = document.querySelectorAll("pre");
+    const snippets = document.querySelectorAll("pre");
 
-  snippets.forEach((snippet) => {
-    if (navigator.clipboard) {
-      const button = document.createElement("button");
+    snippets.forEach((snippet) => {
+        if (navigator.clipboard) {
+            const button = document.createElement("button");
 
-      button.innerText = "Copy code";
-      button.className = "btn__copy-code";
+            button.innerText = "Copy code";
+            button.className = "btn__copy-code";
 
-      snippet.appendChild(button);
+            snippet.appendChild(button);
 
-      button.addEventListener("click", async () => {
-        await copyCode(snippet);
-        button.innerText = "Copied!";
+            button.addEventListener("click", async () => {
+                await copyCode(snippet);
+                button.innerText = "Copied!";
 
-        setTimeout(() => {
-          button.innerText = "Copy code";
-        }, 2000);
-      });
-    }
-  });
+                setTimeout(() => {
+                    button.innerText = "Copy code";
+                }, 2000);
+            });
+        }
+    });
 }
 
 async function copyCode(snippet: HTMLPreElement) {
-  const code = snippet.querySelector("code");
-  const text = code?.innerText;
+    const code = snippet.querySelector("code");
+    const text = code?.innerText;
 
-  if (text) await navigator.clipboard.writeText(text);
+    if (text) await navigator.clipboard.writeText(text);
 }
 ---
 
 <script is:inline>
-  // Initialize copy buttons when this component loads
-  initializeCopyButtons();
+    initializeCopyButtons();
 </script>

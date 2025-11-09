@@ -1,32 +1,32 @@
 ---
 interface Props {
-  title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
 
 import "@fontsource/poppins";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Hi I'm Matteo Gobbo. I build things for the web."
-    />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="Hi I'm Matteo Gobbo. I build things for the web."
+        />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
 
-    <ViewTransitions />
-  </head>
-  <body class="bg-customDarkGrey text-customWhite">
-    <main class="mx-auto md:max-w-5xl max-w-xs md:mt-16 mt-12">
-      <slot />
-    </main>
-  </body>
+        <ClientRouter />
+    </head>
+    <body class="bg-customDarkGrey text-customWhite">
+        <main class="mx-auto md:max-w-5xl max-w-xs md:mt-16 mt-12">
+            <slot />
+        </main>
+    </body>
 </html>
