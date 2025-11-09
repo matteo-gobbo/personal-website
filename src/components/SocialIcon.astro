@@ -13,5 +13,12 @@ const { href, src, alt } = Astro.props;
   target="_blank"
   href={href}
 >
-  <img src={src} alt={alt} height="32" width="32" style="fill: white;" />
+  <img
+    src={src}
+    alt={alt}
+    height="32"
+    width="32"
+    style="fill: white;"
+    loading="lazy"
+  />
 </a>

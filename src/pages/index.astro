@@ -1,59 +1,89 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Link from "../components/Link.astro";
-import Social from "../components/Social.astro";
+import { getCollection } from "astro:content";
+import { formatDate } from "../utils/date";
+import Socials from "../components/Socials.astro";
+
+const blogEntries = await getCollection("blog");
+
+const publishedBlogPosts = blogEntries
+    .filter((a) => a.data.publishedDate !== null)
+    .sort((a, b) => {
+        const dateA = new Date(a.data.publishedDate!).getTime();
+        const dateB = new Date(b.data.publishedDate!).getTime();
+        return dateB - dateA;
+    });
 ---
 
 <Layout title="Matteo Gobbo | Front-end Developer">
-  <main>
-    <div class="mx-auto md:max-w-7xl max-w-xs md:mt-32 mt-16">
-      <h1 class="md:text-7xl text-4xl font-bold mb-8">
-        Hi I'm <br />Matteo Gobbo
-      </h1>
-      <h2 class="text-3xl font-light text-customLightGrey mb-8">
-        I build things for the web.
-      </h2>
-      <p class="text-customParagraph leading-6 mb-2">
-        I worked as a freelancer for two years and I had the chance to work on
-        multiple digital products <br />for both business and consumers,
-        covering a variety of different domains.
-      </p>
-      <p class="text-customParagraph leading-6 mb-2">
-        Main collaborations have been with <Link
-          text="Fuoricittà"
-          href="https://fuoricitta.it/"
-        />
-        and
-        <Link text="Heartbrain" href="https://heartbrain.group/" />.
-      </p>
-      <p class="text-customParagraph mb-12">
-        Since July 2022 I'm Front-end Developer at <Link
-          text="Conio Inc"
-          href="https://www.conio.com/"
-          isExternal
-        />.
-      </p>
-      <div class="flex start items-center">
-        Let's keep in touch on:
-        <div class="w-4"></div>
-        <Social
-          href="https://www.linkedin.com/in/matteo-gobbo/"
-          src="/socials/linkedin.svg"
-          alt="linkedin"
-        />
-        <div class="w-2"></div>
-        <Social
-          href="https://twitter.com/matteogobbo_"
-          src="/socials/x.svg"
-          alt="x"
-        />
-        <div class="w-2"></div>
-        <Social
-          href="https://github.com/matteo-gobbo"
-          src="/socials/github.svg"
-          alt="github"
-        />
-      </div>
-    </div>
-  </main>
+    <section>
+        <h1 class="md:text-7xl text-4xl font-bold mb-8">
+            Hi I'm <br />Matteo Gobbo
+        </h1>
+        <h2 class="text-3xl font-light text-customLightGrey mb-8">
+            I build things for the web.
+        </h2>
+        <p class="text-customParagraph leading-6 mb-2">
+            I worked as a freelancer for two years and I had the chance to work
+            on multiple digital products <br />for both business and consumers,
+            covering a variety of different domains.
+        </p>
+        <p class="text-customParagraph leading-6 mb-2">
+            Main collaborations have been with <Link
+                text="Fuoricittà"
+                href="https://fuoricitta.it/"
+                isExternal
+            />
+            and
+            <Link
+                text="Heartbrain"
+                href="https://heartbrain.group/"
+                isExternal
+            />.
+        </p>
+        <p class="text-customParagraph mb-12">
+            Since July 2022 I'm Front-end Developer at <Link
+                text="Conio Inc"
+                href="https://www.conio.com/"
+                isExternal
+            />.
+        </p>
+    </section>
+    <section class="mt-24">
+        <h3 class="md:text-4xl text-xl font-bold mb-4">Blog</h3>
+        <div>
+            <ul class="flex flex-col gap-y-2">
+                {
+                    publishedBlogPosts.length === 0 && (
+                        <span>No posts yet...</span>
+                    )
+                }
+                {
+                    publishedBlogPosts.map((blogPostEntry) => (
+                        <li class="flex justify-between">
+                            <a
+                                href={`/blog/${blogPostEntry.slug}`}
+                                class="hover:underline"
+                            >
+                                <span>{blogPostEntry.data.title}</span>
+                                {blogPostEntry.data.publishedDate === null && (
+                                    <span class="ml-8 px-4  bg-yellow-600 text-white rounded-full">
+                                        draft
+                                    </span>
+                                )}
+                            </a>
+                            <span>
+                                {formatDate(blogPostEntry.data.publishedDate)}
+                            </span>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </section>
+    <section class="mt-24 mb-16">
+        <h3 class="md:text-4xl text-xl font-bold mb-4">Contacts</h3>
+        <Socials />
+    </section>
 </Layout>

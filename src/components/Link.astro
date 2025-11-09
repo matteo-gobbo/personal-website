@@ -9,9 +9,7 @@ const { text, href, isExternal } = Astro.props;
 ---
 
 <a
-  class="text-customBlue underline cursor-pointer hover:no-underline"
+  class="text-customBlue hover:underline cursor-pointer no-underline"
   href={href}
-  target={isExternal ? "_blank" : undefined}
+  target={isExternal ? "_blank" : undefined}>{text}</a
 >
-  {text}
-</a>

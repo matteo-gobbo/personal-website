@@ -6,9 +6,10 @@ interface Props {
 const { title } = Astro.props;
 
 import "@fontsource/poppins";
+import { ViewTransitions } from "astro:transitions";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,8 +21,12 @@ import "@fontsource/poppins";
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+
+    <ViewTransitions />
   </head>
   <body class="bg-customDarkGrey text-customWhite">
-    <slot />
+    <main class="mx-auto md:max-w-5xl max-w-xs md:mt-16 mt-12">
+      <slot />
+    </main>
   </body>
 </html>
