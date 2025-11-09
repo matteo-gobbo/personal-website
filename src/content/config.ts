@@ -8,7 +8,7 @@ const blogCollection = defineCollection({
     author: z.string().default("Matteo Gobbo"),
     tags: z.array(z.string()),
     language: z.enum(["en"]),
-    publishedDate: z.date(),
+    publishedDate: z.date().nullable(),
     // isDraft: z.boolean(),
     // publishedIndex: z.number(),
     // canonicalURL: z.string().url(),
