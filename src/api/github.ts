@@ -13,7 +13,7 @@ const githubResponseSchema = z.object({
       state: z.string(),
       created_at: z.string(),
       updated_at: z.string(),
-      closed_at: z.string(),
+      closed_at: z.nullable(z.string()),
     }),
   ),
 });

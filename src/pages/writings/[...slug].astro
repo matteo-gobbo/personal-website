@@ -2,10 +2,10 @@
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
-import "../../tailwind.css";
 import { Icon } from "astro-icon/components";
 import Socials from "../../components/Socials.astro";
 import CopyCodeButton from "../../components/CopyCodeButton.astro";
+import { findAdjacentPosts } from "../../utils/blog";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -20,16 +20,15 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const posts = await getCollection(
-    "blog",
-    ({ data }) =>
-        data.publishedIndex === post.data.publishedIndex + 1 ||
-        data.publishedIndex === post.data.publishedIndex - 1,
-);
-const { Content } = await post.render();
 
-const next = posts[0];
-const prev = posts[1];
+const allPosts = await getCollection(
+    "blog",
+    ({ data }) => data.publishedAt !== null,
+);
+
+const { prev, next } = findAdjacentPosts(post.slug, allPosts);
+
+const { Content } = await post.render();
 ---
 
 <Layout title={post.data.title}>

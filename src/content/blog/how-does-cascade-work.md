@@ -4,7 +4,8 @@ description: "How does Cascade work"
 author: "Matteo Gobbo"
 tags: ["astro", "blogging", "learning in public"]
 language: "en"
-publishedDate: null
+publishedAt: null
+editedAt: null
 ---
 
 # How does Cascade work

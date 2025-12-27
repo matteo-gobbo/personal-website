@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Link from "../components/Link.astro";
 import { getCollection } from "astro:content";
 import { formatDate } from "../utils/date";
 import Socials from "../components/Socials.astro";
@@ -10,10 +9,10 @@ import { extractRepositoryUrl, extractRepositoryName } from "../utils/github";
 const blogEntries = await getCollection("blog");
 
 const publishedBlogPosts = blogEntries
-    .filter((a) => a.data.publishedDate !== null)
+    .filter((a) => a.data.publishedAt !== null)
     .sort((a, b) => {
-        const dateA = new Date(a.data.publishedDate!).getTime();
-        const dateB = new Date(b.data.publishedDate!).getTime();
+        const dateA = new Date(a.data.publishedAt!).getTime();
+        const dateB = new Date(b.data.publishedAt!).getTime();
         return dateB - dateA;
     });
 
@@ -28,44 +27,28 @@ const ossContributions = await getGithubPullRequests();
         <h2 class="text-3xl font-light text-customLightGrey mb-8">
             I like to build things for the web.
         </h2>
-        <p class="text-customParagraph leading-6 mb-2">
-            I started my journey as a freelancer, working on a wide range of
-            digital products across very different domains.<br /> I had the chance
-            to collaborate mainly with Fuoricittà (now <a
-                class="text-customBlue hover:underline cursor-pointer no-underline"
-                target="_blank"
-                rel="noreferrer"
-                href="https://humans.tech/">HumansTech</a
-            >), which allowed me to dive into fast-paced, problem-solving
-            environments, and <a
-                class="text-customBlue hover:underline cursor-pointer no-underline"
-                target="_blank"
-                rel="noreferrer"
-                href="https://heartbrain.group/">Heartbrain</a
-            >.
-        </p>
-        <p class="text-customParagraph leading-6 mb-2">
-            Later, I moved into a product-driven role, joining <a
-                class="text-customBlue hover:underline cursor-pointer no-underline"
-                target="_blank"
-                rel="noreferrer"
-                href="https://www.conio.com/">Conio</a
-            > for 2.5 years. There, I learned the care and the attention required
-            to build a product, going deep into a single domain, iterating, refining,
-            and understanding how every detail contributes to the whole.
-        </p>
-        <p class="text-customParagraph mb-12">
-            Since December 2024, I’ve been a Senior Front-end Developer at <a
+        <p class="text-customParagraph">
+            I'm a Senior Front-End Developer at <a
                 class="text-customBlue hover:underline cursor-pointer no-underline"
                 target="_blank"
                 rel="noreferrer"
                 href="https://www.kleecks.com/">Kleecks</a
-            >, helping to build a complex product that enables companies to
-            enhance their websites in terms of UX, performance, SEO, etc.
+            >, a SaaS company specializing in helping businesses optimize their
+            websites across multiple areas, including SEO, UX, performance, and
+            content. <br />I started my career as a freelance consultant,
+            working across different projects and domains and gaining experience
+            in fast-paced environments. I later joined <a
+                class="text-customBlue hover:underline cursor-pointer no-underline"
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.conio.com/">Conio</a
+            >, where I developed a passion for product thinking and learned how
+            to build, iterate on, and maintain a frontend product with long-term
+            quality in mind.
         </p>
     </section>
     <section class="mt-24">
-        <h3 class="md:text-4xl text-xl font-bold mb-4">Blog</h3>
+        <h3 class="md:text-4xl text-xl font-bold mb-4">Writings</h3>
         <div>
             <ul class="flex flex-col gap-y-2">
                 {
@@ -77,13 +60,13 @@ const ossContributions = await getGithubPullRequests();
                     publishedBlogPosts.map((blogPostEntry) => (
                         <li class="flex justify-between">
                             <a
-                                href={`/blog/${blogPostEntry.slug}`}
+                                href={`/writings/${blogPostEntry.slug}`}
                                 class="hover:underline"
                             >
                                 <span>{blogPostEntry.data.title}</span>
                             </a>
-                            <span>
-                                {formatDate(blogPostEntry.data.publishedDate!)}
+                            <span class="text-sm">
+                                {formatDate(blogPostEntry.data.publishedAt!)}
                             </span>
                         </li>
                     ))
@@ -92,13 +75,13 @@ const ossContributions = await getGithubPullRequests();
         </div>
     </section>
     <section class="mt-24">
-        <h3 class="md:text-4xl text-xl font-bold mb-4">OSS Contributions</h3>
+        <h3 class="md:text-4xl text-xl font-bold mb-4">Contributions</h3>
         <div>
             <ul class="flex flex-col gap-y-2">
                 {
                     ossContributions.map((c) => (
                         <li class="flex justify-between">
-                            <div class="flex gap-x-4">
+                            <div class="flex flex-col flex-1 gap-x-4">
                                 <a
                                     href={c.html_url}
                                     target="_blank"
@@ -113,12 +96,14 @@ const ossContributions = await getGithubPullRequests();
                                     href={extractRepositoryUrl(
                                         c.repository_url,
                                     )}
-                                    class="hover:underline text-gray-400"
+                                    class="hover:underline text-gray-400 text-sm"
                                 >
                                     {extractRepositoryName(c.repository_url)}
                                 </a>
                             </div>
-                            <span>{formatDate(c.created_at)}</span>
+                            <span class="flex-2 text-sm">
+                                {formatDate(c.created_at)}
+                            </span>
                         </li>
                     ))
                 }
