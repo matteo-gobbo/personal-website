@@ -1,11 +1,10 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import Socials from "../../components/Socials.astro";
-import CopyCodeButton from "../../components/CopyCodeButton.astro";
 import { findAdjacentPosts } from "../../utils/blog";
+import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -28,10 +27,33 @@ const allPosts = await getCollection(
 
 const { prev, next } = findAdjacentPosts(post.slug, allPosts);
 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.data.title,
+    description: post.data.description,
+    author: {
+        "@type": "Person",
+        name: post.data.author,
+        url: Astro.site?.toString(),
+    },
+    datePublished: post.data.publishedAt?.toISOString(),
+    dateModified: post.data.editedAt?.toISOString(),
+    url: canonicalURL.toString(),
+    keywords: post.data.tags.join(", "),
+};
+
 const { Content } = await post.render();
 ---
 
-<Layout title={post.data.title}>
+<BlogPostLayout
+    title={post.data.title}
+    description={post.data.description}
+    canonicalURL={canonicalURL}
+    structuredData={structuredData}
+>
     <a href="/" class="flex justify-start items-center">
         <Icon name="arrow-back" size={40} class="rotate-180 inline-block" />
         <span>Home</span>
@@ -45,7 +67,7 @@ const { Content } = await post.render();
             prev && (
                 <div class="flex justify-start items-center w-full">
                     <a
-                        href={`/blog/${prev.slug}`}
+                        href={`/writings/${prev.slug}`}
                         class="flex justify-start items-center underline hover:no-underline"
                     >
                         <Icon
@@ -62,7 +84,7 @@ const { Content } = await post.render();
             next && (
                 <div class="flex justify-end items-center w-full">
                     <a
-                        href={`/blog/${next.slug}`}
+                        href={`/writings/${next.slug}`}
                         class="flex justify-start items-center underline hover:no-underline"
                     >
                         <span>{next.data.title}</span>
@@ -79,6 +101,4 @@ const { Content } = await post.render();
 
     <Socials />
     <div class="h-16"></div>
-
-    <CopyCodeButton />
-</Layout>
+</BlogPostLayout>

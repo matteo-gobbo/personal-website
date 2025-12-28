@@ -1,9 +1,12 @@
 ---
 interface Props {
     title: string;
+    description: string;
+    canonicalURL: URL;
+    structuredData: unknown;
 }
 
-const { title } = Astro.props;
+const { title, description, canonicalURL, structuredData } = Astro.props;
 
 import "@fontsource/poppins";
 import { ClientRouter } from "astro:transitions";
@@ -13,14 +16,17 @@ import { ClientRouter } from "astro:transitions";
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="description"
-            content="Hi I'm Matteo Gobbo. I build things for the web."
-        />
+        <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <meta name="generator" content={Astro.generator} />
+        <link rel="canonical" href={canonicalURL} />
         <title>{title}</title>
+
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(structuredData)}
+        />
 
         <ClientRouter />
     </head>
