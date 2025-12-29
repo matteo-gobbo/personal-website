@@ -20,13 +20,18 @@ const ossContributions = await getGithubPullRequests();
 ---
 
 <style>
-    h2 {
-        margin-bottom: 1rem;
+    #hero {
+        h2 {
+            margin-bottom: 1rem;
+        }
+        a {
+            color: var(--blue);
+        }
     }
 </style>
 
 <Layout title="Matteo Gobbo | Front-end Developer">
-    <section>
+    <section id="hero">
         <h1>
             Hi, I'm <br />Matteo Gobbo
         </h1>

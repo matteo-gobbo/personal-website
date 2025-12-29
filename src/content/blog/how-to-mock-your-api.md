@@ -1,6 +1,6 @@
 ---
 title: "MSW: The Best Way to Mock Your APIs"
-description: "MSW: The Best Way to Mock Your APIs"
+description: "Learn how to use Mock Service Worker (MSW) to mock REST and GraphQL APIs, improve frontend development workflows, and work without a ready backend."
 author: "Matteo Gobbo"
 tags: ["msw", "mock-service-worker", "api-mocking", "graphql", "typescript", "developer-experience"]
 language: "en"
