@@ -48,33 +48,38 @@ const structuredData = {
 const { Content } = await post.render();
 ---
 
+<style>
+    .navigation {
+        display: flex;
+        align-items: center;
+
+        .rotate {
+            transform: translate(0, 0) rotate(-180deg) skewX(0) skewY(0)
+                scaleX(1) scaleY(1);
+        }
+    }
+</style>
+
 <BlogPostLayout
     title={post.data.title}
     description={post.data.description}
     canonicalURL={canonicalURL}
     structuredData={structuredData}
 >
-    <a href="/" class="flex justify-start items-center">
-        <Icon name="arrow-back" size={40} class="rotate-180 inline-block" />
+    <a href="/" class="navigation">
+        <Icon name="arrow-back" size={40} class="rotate" />
         <span>Home</span>
     </a>
     <article>
         <Content />
     </article>
 
-    <section class="flex justify-between items-center mb-16">
+    <section>
         {
             prev && (
-                <div class="flex justify-start items-center w-full">
-                    <a
-                        href={`/writings/${prev.slug}`}
-                        class="flex justify-start items-center underline hover:no-underline"
-                    >
-                        <Icon
-                            name="arrow-back"
-                            size={40}
-                            class="rotate-180 inline-block"
-                        />
+                <div>
+                    <a href={`/writings/${prev.slug}`}>
+                        <Icon name="arrow-back" size={40} />
                         <span>{prev.data.title}</span>
                     </a>
                 </div>
@@ -82,17 +87,10 @@ const { Content } = await post.render();
         }
         {
             next && (
-                <div class="flex justify-end items-center w-full">
-                    <a
-                        href={`/writings/${next.slug}`}
-                        class="flex justify-start items-center underline hover:no-underline"
-                    >
+                <div>
+                    <a href={`/writings/${next.slug}`}>
                         <span>{next.data.title}</span>
-                        <Icon
-                            name="arrow-back"
-                            size={40}
-                            class="inline-block"
-                        />
+                        <Icon name="arrow-back" size={40} />
                     </a>
                 </div>
             )
@@ -100,5 +98,4 @@ const { Content } = await post.render();
     </section>
 
     <Socials />
-    <div class="h-16"></div>
 </BlogPostLayout>

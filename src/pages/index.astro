@@ -19,17 +19,20 @@ const publishedBlogPosts = blogEntries
 const ossContributions = await getGithubPullRequests();
 ---
 
+<style>
+    h2 {
+        margin-bottom: 1rem;
+    }
+</style>
+
 <Layout title="Matteo Gobbo | Front-end Developer">
     <section>
-        <h1 class="md:text-7xl text-4xl font-bold mb-8">
-            Hi I'm <br />Matteo Gobbo
+        <h1>
+            Hi, I'm <br />Matteo Gobbo
         </h1>
-        <h2 class="text-3xl font-light text-customLightGrey mb-8">
-            I like to build things for the web.
-        </h2>
-        <p class="text-customParagraph">
+        <h2>I like to build things for the web.</h2>
+        <p>
             I'm a Senior Front-End Developer at <a
-                class="text-customBlue hover:underline cursor-pointer no-underline"
                 target="_blank"
                 rel="noreferrer"
                 href="https://www.kleecks.com/">Kleecks</a
@@ -38,7 +41,6 @@ const ossContributions = await getGithubPullRequests();
             content. <br />I started my career as a freelance consultant,
             working across different projects and domains and gaining experience
             in fast-paced environments. I later joined <a
-                class="text-customBlue hover:underline cursor-pointer no-underline"
                 target="_blank"
                 rel="noreferrer"
                 href="https://www.conio.com/">Conio</a
@@ -47,10 +49,10 @@ const ossContributions = await getGithubPullRequests();
             quality in mind.
         </p>
     </section>
-    <section class="mt-24">
-        <h3 class="md:text-4xl text-xl font-bold mb-4">Writings</h3>
+    <section>
+        <h3 class="title">Writings</h3>
         <div>
-            <ul class="flex flex-col gap-y-2">
+            <ul>
                 {
                     publishedBlogPosts.length === 0 && (
                         <span>No posts yet...</span>
@@ -58,14 +60,11 @@ const ossContributions = await getGithubPullRequests();
                 }
                 {
                     publishedBlogPosts.map((blogPostEntry) => (
-                        <li class="flex justify-between">
-                            <a
-                                href={`/writings/${blogPostEntry.slug}`}
-                                class="hover:underline"
-                            >
+                        <li class="list-item">
+                            <a href={`/writings/${blogPostEntry.slug}`}>
                                 <span>{blogPostEntry.data.title}</span>
                             </a>
-                            <span class="text-sm">
+                            <span class="date">
                                 {formatDate(blogPostEntry.data.publishedAt!)}
                             </span>
                         </li>
@@ -74,44 +73,41 @@ const ossContributions = await getGithubPullRequests();
             </ul>
         </div>
     </section>
-    <section class="mt-24">
-        <h3 class="md:text-4xl text-xl font-bold mb-4">Contributions</h3>
+    <section>
+        <h4 class="title">Contributions</h4>
         <div>
-            <ul class="flex flex-col gap-y-2">
+            <ul>
                 {
                     ossContributions.map((c) => (
-                        <li class="flex justify-between">
-                            <div class="flex flex-col flex-1 gap-x-4">
+                        <li class="list-item">
+                            <div class="detail">
                                 <a
                                     href={c.html_url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    class="hover:underline"
                                 >
                                     {c.title}
                                 </a>
                                 <a
+                                    class="sub-title"
                                     target="_blank"
                                     rel="noreferrer"
                                     href={extractRepositoryUrl(
                                         c.repository_url,
                                     )}
-                                    class="hover:underline text-gray-400 text-sm"
                                 >
                                     {extractRepositoryName(c.repository_url)}
                                 </a>
                             </div>
-                            <span class="flex-2 text-sm">
-                                {formatDate(c.created_at)}
-                            </span>
+                            <span class="date">{formatDate(c.created_at)}</span>
                         </li>
                     ))
                 }
             </ul>
         </div>
     </section>
-    <section class="mt-24 mb-16">
-        <h3 class="md:text-4xl text-xl font-bold mb-4">Contacts</h3>
+    <section>
+        <h5 class="title">Contacts</h5>
         <Socials />
     </section>
 </Layout>

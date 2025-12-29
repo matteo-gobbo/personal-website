@@ -1,4 +1,9 @@
 ---
+import { ClientRouter } from "astro:transitions";
+
+import "../styles/preflight.css";
+import "../styles/global.css";
+
 interface Props {
     title: string;
     description: string;
@@ -7,8 +12,6 @@ interface Props {
 }
 
 const { title, description, canonicalURL, structuredData } = Astro.props;
-
-import { ClientRouter } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -29,8 +32,8 @@ import { ClientRouter } from "astro:transitions";
 
         <ClientRouter />
     </head>
-    <body class="bg-customDarkGrey text-customWhite">
-        <main class="mx-auto md:max-w-5xl max-w-xs md:mt-16 mt-12">
+    <body>
+        <main>
             <slot />
         </main>
     </body>

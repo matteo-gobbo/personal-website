@@ -1,0 +1,139 @@
+:root {
+    --black: #111;
+    --white: #f5f5f5;
+    --dark-grey: #222222;
+    --grey: #d5d5d5;
+    --light-grey: #aaaaaa;
+    --dark-blue: #1e40af;
+    --blue: #068fff;
+    --yellow: #facc15;
+    --code: #f87171;
+
+    --font-sans:
+        "Poppins", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-mono:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+
+    --text-sm: 0.875rem;
+    --text-3xl: 1.875rem;
+    --text-5xl: 3rem;
+}
+
+body {
+    background-color: var(--dark-grey);
+    color: var(--white);
+    font-family: var(--font-sans);
+}
+
+main {
+    max-width: 64rem;
+    margin: 2rem auto;
+}
+
+a {
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+h1 {
+    font-size: 3.75rem;
+    line-height: 1.35;
+}
+
+h2 {
+    font-size: 2.25rem;
+    color: var(--light-grey);
+}
+
+section {
+    margin: 3rem auto;
+
+    .title {
+        margin-bottom: 1rem;
+        font-size: 1.875rem;
+    }
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .date {
+        font-size: var(--text-sm);
+    }
+
+    .detail {
+        display: flex;
+        flex-direction: column;
+
+        .sub-title {
+            color: var(--light-grey);
+            font-size: var(--text-sm);
+        }
+    }
+}
+
+article {
+    margin-bottom: 1rem;
+}
+
+article h1 {
+    font-size: var(--text-5xl);
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+article p {
+    margin-bottom: 0.5rem;
+}
+
+article h2 {
+    font-size: var(--text-3xl);
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+article ol {
+    display: flex;
+    flex-direction: column;
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    row-gap: 0.5rem;
+}
+
+article ul {
+    row-gap: 0.5rem;
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+article pre {
+    margin: 2rem auto;
+    padding: 1.5rem 1rem;
+    position: relative;
+}
+
+article p > code {
+    color: var(--code);
+    background-color: var(--dark-grey);
+    padding: auto 0.25rem;
+}
+
+/*article .btn__copy-code {
+    @apply absolute top-4 right-12 shadow-lg px-2 py-1 rounded-md text-customLightGrey;
+}*/

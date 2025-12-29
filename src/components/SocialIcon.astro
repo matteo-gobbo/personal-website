@@ -1,24 +1,29 @@
 ---
 interface Props {
-  href: string;
-  src: string;
-  alt: string;
+    href: string;
+    src: string;
+    alt: string;
 }
 
 const { href, src, alt } = Astro.props;
 ---
 
-<a
-  class="md:w-[28px] w-[28px] flex justify-center items-center p-1 bg-customBlue rounded-full"
-  target="_blank"
-  href={href}
->
-  <img
-    src={src}
-    alt={alt}
-    height="32"
-    width="32"
-    style="fill: white;"
-    loading="lazy"
-  />
+<style>
+    img {
+        border-radius: 100%;
+        height: 26px;
+        width: 26px;
+        padding: 0.25rem;
+        background-color: var(--dark-blue);
+    }
+</style>
+<a target="_blank" href={href}>
+    <img
+        src={src}
+        alt={alt}
+        height="26"
+        width="26"
+        style="fill: white;"
+        loading="lazy"
+    />
 </a>
